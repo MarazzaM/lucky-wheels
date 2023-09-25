@@ -8,13 +8,13 @@
  * 
  */
 var gameSettings = {
-	enableFixedResult:true, //option to have fixed result by API, enabling this will disable 2D physics engine
+	enableFixedResult:false, //option to have fixed result by API, enabling this will disable 2D physics engine
 	enablePercentage:false, //option to have result base on percentage, enabling this will disable 2D physics engine
 	spinDirection:true, //true to spin right, false to spin left
 	spinSpeed:30, //wheel spinning speed
 	touchSpin:true, //touch to spin (true/false)
 	gamePlayType:true, //game play type; true for game1, false for game2
-	gameChance:7, //total chances for game 1
+	gameChance:3, //total chances for game 1
 	gameBetPoint:500, //total bet point for game 2
 	gameCanBet:10, //total bet increase for game 2
 	gameMaxBet:1000, //max bet for game 2
@@ -25,14 +25,14 @@ var gameSettings = {
 };
 
 var textDisplay = {
-	statusText_arr:['SPIN YOUR FOTUNE','SPINNING...','[NUMBER]PTS', 'WIN [NUMBER]PTS', 'BETTER LUCK NEXT TIME!', 'JACKPOT [NUMBER]','YOU LOSS ALL POINTS'],
+	statusText_arr:['Haz girar la rueda','GIRANDO...','[NUMBER]PTS', 'GANAS [NUMBER]PTS', 'MEJOR SUERTE LA PRÓXIMA!', 'JACKPOT [NUMBER]','PIERDES TODOS TUS PUNTOS'],
 	creditText:'[NUMBER]PTS',
 	chancesText:'x [NUMBER]',
-	instructionTxt1:'You have total 7 ticket chances,\nspin the wheel or tap on the spin button to begin.',
+	instructionTxt1:'Tienes 3 tickets para intentar,\ngira la rueda o apreta en el botón para empezar.',
 	instructionTxt2:'First place your bets,\nspin the wheel or tap on the spin button to begin.',
-	resultTitleText:'GAME OVER',
+	resultTitleText:'FIN DEL JUEGO',
 	resultScoreText:'[NUMBER]PTS',
-	exitMessage:'Are you sure\nyou want to quit?'
+	exitMessage:'¿Estás seguro \nque quieres salir?'
 };
 
 //wheel segments
@@ -80,9 +80,9 @@ var wheelSecond_arr = [{src:'', highlight:'', regX:0, regY:100, mutiply:1, perce
 
 //Social share, [SCORE] will replace with game score
 var shareEnable = true; //toggle share
-var shareText = 'SHARE YOUR SCORE'; //social share message
-var shareTitle = 'Highscore on Lucky Wheels Game is [SCORE]PTS.';//social share score title
-var shareMessage = '[SCORE]PTS is mine new highscore on Lucky Wheels Game! Try it now!'; //social share score message
+var shareText = 'COMPARTE TU PUNTAJE'; //social share message
+var shareTitle = 'El puntaje más alto es [SCORE]PTS.';//social share score title
+var shareMessage = '[SCORE]PTS es mi puntaje más alto, Ahora inténtalo vos!'; //social share score message
 
 /*!
  *
