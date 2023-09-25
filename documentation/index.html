@@ -1,0 +1,648 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Lucky Wheels Documentation</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+    <link rel="stylesheet" href="assets/blueprint-css/prettify.css">
+	<script src="assets/js/prettify.js" defer></script>
+    <script>
+	window.onload = (function(){ prettyPrint(); });
+	</script>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;Lucky Wheels&rdquo; Documentation by &ldquo;demonisblack&rdquo; v2.8</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;Lucky Wheels&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 10/7/2017<br>
+					By: demonisblack<br>
+					Email: <a href="mailto:demonisblack@gmail.com">demonisblack@gmail.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing my game. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/demonisblack">here</a>. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+        	<li><a href="#introduction">Introduction</a></li>
+            <li><a href="#gettingStarted">Getting Started</a></li>
+            <li><a href="#htmlStructure">HTML Structure</a></li>
+			<li><a href="#cssFiles">CSS Files and Structure</a></li>
+			<li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#gameFunctions">Game Functions</a></li>
+            <li><a href="#gameAssets">Game Assets</a></li>
+            <li><a href="#compatibility">Compatibility</a></li>
+            <li><a href="#addons">Add-ons</a></li>
+			<li><a href="#credits">Sources and Credits</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+            <li><a href="#support">Support Policy</a></li>
+		</ol>
+		
+		<hr>
+        
+        <h3 id="introduction"><strong>A) Introduction</strong> - <a href="#toc">top</a></h3>
+        <p>Lucky Wheels is a HTML5 game where you spin the wheel to win the points, it come with 2 wheels where it give a second chance to bonus up the score or loss it all.</p>
+        
+        <p>The ZIP package contains the game with 1280×768 resolution that scales to fit the whole screen device, but it may not be perfectly full screen.</p>
+        
+        <p>
+        <strong>How To Play:</strong><br>
+        1) Spin the wheel or tap on the spin button to play<br>
+        2) You have total 7 ticket chances to get high score<br>
+        </p>
+        
+        <img src="assets/images/type1.jpg" /><br>
+        <img src="assets/images/type2.jpg" /><br>
+        <img src="assets/images/onewheel.jpg" /><br>
+        
+        <hr>
+        
+        <h3 id="gettingStarted"><strong>B) Getting Started</strong> - <a href="#toc">top</a></h3>
+		<p>To install the game just upload folder 'game' to your server. The game won't run locally with some browser like Chrome due to some security mode.</p>        
+        <p>You need a website that runs PHP to make facebook share button work, and make sure to change Facebook Open Graph meta and Twitter meta in index.html, just replace [GAME_URL] to your game URL.</p>
+        <pre class="prettyprint linenums">
+        &lt;!-- for Facebook --&gt;
+        &lt;meta property=&quot;og:image&quot; content=&quot;[GAME_URL]/share.jpg&quot; /&gt;
+        &lt;meta property=&quot;og:url&quot; content=&quot;[GAME_URL]&quot; /&gt;
+        
+        &lt;!-- for Twitter --&gt;
+        &lt;meta name=&quot;twitter:image&quot; content=&quot;[GAME_URL]/share.jpg&quot; /&gt;
+        </pre>
+        
+        <p>You can easily customize game text and settings in game.js file
+        
+        <pre class="prettyprint linenums">
+    var gameSettings = {
+        enableFixedResult:false, //option to have fixed result by API, enabling this will disable 2D physics engine
+        enablePercentage:true, //option to have result base on percentage, enabling this will disable 2D physics engine
+        spinDirection:true, //true to spin right, false to spin left
+        spinSpeed:30, //wheel spinning speed
+        touchSpin:true, //touch to spin (true/false)
+        gamePlayType:true, //game play type; true for game1, false for game2
+        gameChance:7, //total chances for game 1
+        gameBetPoint:500, //total bet point for game 2
+        gameCanBet:10, //total bet increase for game 2
+        gameMaxBet:1000, //max bet for game 2
+        firstWheelRadius:230, //first wheel radius for slot color feature
+        secondWheelRadius:100, //second wheel radius for slot color feature
+        defaultStatusBgColor:'#655643', //status bacgkround color
+        secondWheel:true //option to display second wheel; (true/false)
+    };
+    
+    var textDisplay = {
+        statusText_arr:['SPIN YOUR FOTUNE','SPINNING...','[NUMBER]PTS', 'WIN [NUMBER]PTS', 'BETTER LUCK NEXT TIME!', 'JACKPOT [NUMBER]','YOU LOSS ALL POINTS'],
+        creditText:'[NUMBER]PTS',
+        chancesText:'x [NUMBER]',
+        instructionTxt1:'You have total 7 ticket chances,\nspin the wheel or tap on the spin button to begin.',
+        instructionTxt2:'First place your bets,\nspin the wheel or tap on the spin button to begin.',
+        resultTitleText:'GAME OVER',
+        resultScoreText:'[NUMBER]PTS',
+        exitMessage:'Are you sure\nyou want to quit?'
+    };
+    
+    //wheel segments
+    var wheel_arr = [{src:'assets/item_wheel_01.png', highlight:'assets/item_wheel_01_h.png', color:'#FDCC09', regX:1, regY:223, point:10, type:0, percent:30,
+                        slot:{
+                                color:'#FDCC09',
+                                highlightColor:'#FFE600',
+                                stroke:5,
+                                strokeColor:'#fff',
+                                fontSize:45,
+                                text:'10',
+                                textY:140,
+                                textColor:'#fff'
+                            }
+                    },
+                    {src:'assets/item_wheel_02.png', highlight:'assets/item_wheel_02_h.png', color:'#F37621', regX:1, regY:223, point:25, type:0, percent:25},
+                    {src:'assets/item_wheel_03.png', highlight:'assets/item_wheel_03_h.png', color:'#7DB544', regX:1, regY:223, point:50, type:0, percent:20},
+                    {src:'assets/item_wheel_04.png', highlight:'assets/item_wheel_04_h.png', color:'#1A9DD8', regX:1, regY:223, point:80, type:0, percent:15},
+                    {src:'assets/item_wheel_05.png', highlight:'assets/item_wheel_05_h.png', color:'#3F559A', regX:1, regY:223, point:100, type:0, percent:15},
+                    {src:'assets/item_wheel_06.png', highlight:'assets/item_wheel_06_h.png', color:'#91328B', regX:1, regY:223, point:1000, type:0, percent:15},
+                    {src:'assets/item_wheel_07.png', highlight:'assets/item_wheel_07_h.png', color:'#449BD4', regX:1, regY:223, point:250, type:0, percent:15},
+                    {src:'assets/item_wheel_08.png', highlight:'assets/item_wheel_08_h.png', color:'#F37621', regX:1, regY:223, point:500, type:0, percent:15},
+                    {src:'assets/item_wheel_09.png', highlight:'assets/item_wheel_09_h.png', color:'#FDCC09', regX:1, regY:223, point:25, type:0, percent:25},
+                    {src:'assets/item_wheel_10.png', highlight:'assets/item_wheel_10_h.png', color:'#7DB544', regX:1, regY:223, point:0, type:0, percent:25},
+                    {src:'assets/item_wheel_11.png', highlight:'assets/item_wheel_11_h.png', color:'#DA2027', regX:1, regY:223, point:1000000000, type:2, percent:5},
+                    {src:'assets/item_wheel_12.png', highlight:'assets/item_wheel_12_h.png', color:'#475C70', regX:1, regY:223, point:0, type:1, percent:5},
+                    ];
+    
+    //second wheel segments
+    var wheelSecond_arr = [{src:'', highlight:'', regX:0, regY:100, mutiply:1, percent:30, slot:{
+                                color:'#53709D',
+                                highlightColor:'#6386BF',
+                                stroke:8,
+                                strokeColor:'#fff',
+                                fontSize:35,
+                                text:'x1',
+                                textY:60,
+                                textColor:'#fff'
+                            }},
+                        {src:'assets/item_wheel_inner_03.png', highlight:'assets/item_wheel_inner_03_h.png', regX:0, regY:100, mutiply:2, percent:10},
+                        {src:'assets/item_wheel_inner_01.png', highlight:'assets/item_wheel_inner_01_h.png', regX:0, regY:100, mutiply:1, percent:10},
+                        {src:'assets/item_wheel_inner_04.png', highlight:'assets/item_wheel_inner_04_h.png', regX:0, regY:100, mutiply:0, percent:10},
+                        {src:'assets/item_wheel_inner_02.png', highlight:'assets/item_wheel_inner_02_h.png', regX:0, regY:100, mutiply:2, percent:10},
+                        {src:'assets/item_wheel_inner_05.png', highlight:'assets/item_wheel_inner_05_h.png', regX:0, regY:100, mutiply:1, percent:30}];
+    
+    //Social share, [SCORE] will replace with game score
+    var shareEnable = true; //toggle share
+    var shareText = 'SHARE YOUR SCORE'; //social share message
+    var shareTitle = 'Highscore on Lucky Wheels Game is [SCORE]PTS.';//social share score title
+    var shareMessage = '[SCORE]PTS is mine new highscore on Lucky Wheels Game! Try it now!'; //social share score message
+        </pre>
+        
+        <p><strong>wheel_arr</strong> array place all the slots, below is the explanation of each most important <strong>wheel_arr</strong> array item:</p>
+        <ol>
+            <li><strong>src</strong> - image path</li>
+            <li><strong>highlight</strong> - highlight image path</li>
+            <li><strong>color</strong> - slot color code</li>
+            <li><strong>regX</strong> - image position center x</li>
+            <li><strong>regY</strong> - image position center y</li>
+            <li><strong>point</strong> - total point</li>
+            <li><strong>type</strong> - slot type (0 = is normal, 1 = loss all point, 2 = jackpot)</li>
+            <li><strong>percent</strong> - winning percentage (1 - 100)</li>
+            <li><strong>slot</strong> - instead of image you can draw out slot shape and enter text using these options
+            	<ul>
+                	<li><strong>color</strong> - slot color</li>
+                    <li><strong>highlightColor</strong> - slot highlight color</li>
+                    <li><strong>stroke</strong> - stroke highlight number</li>
+                    <li><strong>strokeColor</strong> - stroke highlight color</li>
+                    <li><strong>fontSize</strong> - font size</li>
+                    <li><strong>lineHeight</strong> - line height</li>
+                    <li><strong>text</strong> - text display, use \n tag to display vertical text eg. W\nI\nN\n</li>
+                    <li><strong>textY</strong> - text position y</li>
+                    <li><strong>textColor</strong> - text color</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <p><strong>wheelSecond_arr</strong> array place all the second wheel slots, below is the explanation of each most important <strong>wheelSecond_arr</strong> array item:</p>
+        <ol>
+            <li><strong>src</strong> - image path</li>
+            <li><strong>highlight</strong> - highlight image path</li>
+            <li><strong>regX</strong> - image position center x</li>
+            <li><strong>regY</strong> - image position center y</li>
+            <li><strong>mutiply</strong> - point to multiply (only number)</li>
+            <li><strong>percent</strong> - winning percentage (1 - 100)</li>
+            <li><strong>slot</strong> - instead of image you can draw out slot shape and enter text using these options
+            	<ul>
+                	<li><strong>color</strong> - slot color</li>
+                    <li><strong>highlightColor</strong> - slot highlight color</li>
+                    <li><strong>stroke</strong> - stroke highlight number</li>
+                    <li><strong>strokeColor</strong> - stroke highlight color</li>
+                    <li><strong>lineHeight</strong> - line height</li>
+                    <li><strong>text</strong> - text display, use \n tag to display vertical text eg. W\nI\nN\n</li>
+                    <li><strong>textY</strong> - text position y</li>
+                    <li><strong>textColor</strong> - text color</li>
+                </ul>
+            </li>
+        </ol>
+        <br><br>
+        
+        <h4><strong>To set wheel spinning result:</strong></h4>
+        <p>
+        1. First enable the option below in <strong>gameSettings</strong> in game.js
+        <pre class="prettyprint linenums">
+        enableFixedResult:false, //option to have fixed result by API, enabling this will disable 2D physics engine
+        </pre>
+        
+        2. Call function <strong>getResult(wheelNum, wheelInnerNum)</strong> to set result, by default -1 is to randomize, or any index number from <strong>wheel_arr</strong> and <strong>wheelSecond_arr</strong> array, eg 0 to 11.<br/>
+        *Note the function must call before <strong>startSpinWheel(true)</strong> function, which is the spin button event.
+        <pre class="prettyprint linenums">
+        getResult(8,-1);
+        </pre>
+        </p><br/>
+        
+        <h4><strong>To set wheel spinning result base on percentage:</strong></h4>
+        <p>
+        1. First enable the option below in <strong>gameSettings</strong> in game.js
+        <pre class="prettyprint linenums">
+        enablePercentage:false, //option to have result base on percentage, enabling this will disable 2D physics engine
+        </pre>
+        </p>
+        
+        <p>
+        2. Set winning percentage on each slots in <strong>wheel_arr</strong> and <strong>wheelSecond_arr</strong> in game.js
+			<ul>
+				<li>result percent range from 1 - 100</li>
+				<li>0 to disable</li>
+			</ul>
+        </p><br/>
+        
+        <h4><strong>To change slot image to drawing shape and text display:</strong></h4>
+        <p>
+        1. Add new slot attribute settings to draw the slot shape like below.
+        <pre class="prettyprint linenums">
+        {
+            src:'',
+            highlight:'',
+            color:'#FDCC09',
+            regX:1,
+            regY:223,
+            point:10,
+            type:0,
+            percent:30,
+            slot:{
+                    color:'',
+                    highlightColor:'#CB6907',
+                    stroke:5,
+                    strokeColor:'#fff',
+                    fontSize:45,
+                    lineHeight:45,
+                    text:'10',
+                    textY:140,
+                    textColor:'#fff'
+                }
+        },
+        </pre>
+        </p><br/>
+        
+        <p>
+        2. You can change the drawing radius in <strong>gameSettings</strong> in game.js
+        <pre class="prettyprint linenums">
+        //wheel radius
+        firstWheelRadius:230, //first wheel radius for slot color feature
+        secondWheelRadius:100, //second wheel radius for slot color feature
+        </pre>
+        </p><br/><br/>
+        
+        <p>
+        The sound can be easily disabled to avoid compatibility issues in sound.js file:
+        <pre class="prettyprint linenums">
+        var enableDesktopSound = true; //sound for dekstop
+        var enableMobileSound = true; //sound for mobile and tablet
+        </pre>
+        </p>
+        
+        <p>
+        The mobile rotate instruction can be easily change in mobile.js file:
+        <pre class="prettyprint linenums">
+        var rotateInstruction = true; //enable rotate instruction for mobile
+        var forPortrait=false; //for portrait only, set false for landscape mode
+        </pre>
+        </p>
+        <hr>
+		
+		<h3 id="htmlStructure"><strong>C) HTML Structure</strong> - <a href="#toc">top</a></h3>
+        <p>The page start with the loader wrapper that covering the whole screen in the body. It shows loader progress when calls the function <strong>initPreload()</strong></p>
+        <pre class="prettyprint linenums">
+        &lt;!-- PERCENT LOADER START--&gt;
+    	&#x3C;div id=&#x22;mainLoader&#x22;&#x3E;&#x3C;img src=&#x22;assets/loader.png&#x22; /&#x3E;&#x3C;br&#x3E;&#x3C;span&#x3E;0&#x3C;/span&#x3E;&#x3C;/div&#x3E;
+        &lt;!-- PERCENT LOADER END--&gt;
+        </pre>
+        
+        <p>This section is for browser not support page when calls the function <strong>checkBrowser()</strong>. It shows error message when detect the browser does not support canvas.</p>
+        <pre class="prettyprint linenums">
+        &lt;!-- BROWSER NOT SUPPORT START--&gt;
+        &lt;div id=&quot;notSupportHolder&quot;&gt;
+            &lt;div class=&quot;notSupport&quot;&gt;YOUR BROWSER ISN&#39;T SUPPORTED.&lt;br/&gt;PLEASE UPDATE YOUR BROWSER IN ORDER TO RUN THE GAME&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- BROWSER NOT SUPPORT END--&gt;
+        </pre>
+        
+        <p>Device rotate instruction page when calls the function <strong>checkMobileOrientation()</strong>. It shows rotate instruction when device is in portrait view.</p>
+        <pre class="prettyprint linenums">
+        &lt;!-- ROTATE INSTRUCTION START--&gt;
+        &lt;div id=&quot;rotateHolder&quot;&gt;
+            &lt;div class=&quot;mobileRotate&quot;&gt;
+				&#x3C;div class=&#x22;rotateImg&#x22;&#x3E;&#x3C;img src=&#x22;assets/rotate.png&#x22; /&#x3E;&#x3C;/div&#x3E;
+                &lt;div class=&quot;rotateDesc&quot;&gt;ROTATE YOUR DEVICE &lt;br/&gt;TO LANDSCAPE&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- ROTATE INSTRUCTION END--&gt;
+        </pre>
+        
+        <p>Follow by one canvas tag in the body. The game start initiatie by calls the main function of the game <strong>initMain()</strong>.</p>
+        <pre class="prettyprint linenums">
+        &lt;!-- CANVAS START--&gt;
+        &lt;div id=&quot;canvasHolder&quot;&gt;
+            &lt;canvas id=&quot;gameCanvas&quot; width=&quot;1280&quot; height=&quot;768&quot;&gt;&lt;/canvas&gt;
+        &lt;/div&gt;
+        &lt;!-- CANVAS END--&gt;
+        </pre>
+		<hr>
+
+		<h3 id="cssFiles"><strong>D) CSS Files and Structure</strong> - <a href="#toc">top</a></h3>
+		<p>I'm using two CSS files in this game. The first one is a generic reset file. Many browser interpret the default behavior of html elements differently. By using a general reset CSS file, we can work round this. This file also contains some general styling, such as anchor tag colors, font-sizes, etc. Keep in mind, that these values might be overridden somewhere else in the file.</p>
+		<p>The second file contains all of the specific stylings for the page.</p>
+        <hr>
+		
+        
+		<h3 id="javascript"><strong>E) JavaScript</strong> - <a href="#toc">top</a></h3>
+		
+		<p>This game using Javascript files below.</p>
+		
+		<ol>
+			<li>
+                <strong>jQuery</strong> is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML.<br/><br/>
+            </li>
+            
+            <li>
+                <strong>Detect Mobile Browser</strong> is a open source scripts to detect mobile browsers and phones.<br/><br/>
+            </li>
+            
+            <li>
+                <strong>CreateJs plugin</strong> is a suite of modular libraries and tools which work together to create interactive content on open web technologies via HTML5.<br/><br/>
+            </li>
+            
+            <li>
+                <strong>P2.js</strong> is 2D rigid body physics engine written in JavaScript. Includes collision detection, contacts, friction, restitution, motors, springs, advanced constraints and various shape types.<br/><br/>
+            </li>
+            
+            <li>
+                <strong>TweenMax</strong> is an extremely fast, lightweight, and flexible animation tool that serves as the foundation of the GreenSock Animation Platform (GSAP).<br/><br/>
+            </li>
+            
+            <li>
+                <strong>The game have the following js files</strong>
+                <ul>
+                	<li><strong>init.js :</strong> check if browser or device support <br/><br/></li>
+                    <li><strong>loader.js :</strong> loader to load all game images<br/><br/></li>
+                    <li><strong>main.js :</strong> initiate game setup and browser resize function<br/><br/></li>
+                    <li><strong>mobile.js :</strong> mobile orientation change<br/><br/></li>
+                    <li><strong>canvas.js :</strong> canvas setup and resize<br/><br/></li>
+                    <li><strong>sound.js :</strong> sound event<br/><br/></li>
+                    <li><strong>game.js :</strong> game play and logics<br/><br/></li>
+                    <li><strong>p2.js :</strong> physics setup and collision detect<br/><br/></li>
+                    <li><strong>plugins.js :</strong> additonal useful plugins<br/><br/></li>
+                </ul>
+            </li>
+		</ol>
+        
+        <p>Complete game flow:</p>
+		<ol>
+        	<li>The index.html file start init.js for browser detection</li>
+            <li>If browser is supported, init loader.js to start load asserts with loading progress</li>
+            <li>For mobile the rotate instruction shows when device is in portrait view, detect by mobile.js</li>
+            <li>When all asserts contained in "/assets" folder are loaded, the game start construct canvas.js and main.js from game.js thats shows game menu</li>
+            <li>If user click begin button in game menu, the game will start with game.js</li>
+            <li>If user spin the wheel or click the spin button, the main and second wheel will start spining</li>
+            <li>When both wheels is stopped and slots have point, user will score point</li>
+            <li>If main wheel stop at loss slot, user will lose all point</li>
+            <li>If user used all the tickets, the game will end</li>
+            <li>If user click replay button at game result, it will restart game</li>
+        </ol>
+		
+		<hr>
+        
+        <h3 id="gameFunctions"><strong>F) Game Functions</strong> - <a href="#toc">top</a></h3>
+		
+		<p>The most important functions used for page.</p>
+        <ul>
+        	<li>
+                <strong>checkBrowser()</strong><br/>
+                This function is runs for browser detection<br/><br/>
+            </li>
+            
+            <li>
+                <strong>checkMobileEvent()</strong><br/>
+                This function runs for mobile event<br/><br/>
+            </li>
+        </ul>
+        
+        <p>The most important functions used for game.</p>
+        <ul>
+        	<li>
+                <strong>initMain()</strong><br/>
+                This function build canvas<br/><br/>
+            </li>
+            
+            <li>
+                <strong>startGame()</strong><br/>
+                This function start gameplay<br/><br/>
+            </li>
+            
+            <li>
+                <strong>stopGame()</strong><br/>
+                This function stop gameplay<br/><br/>
+            </li>
+
+            <li>
+                <strong>saveGame()</strong><br>
+                This function save game score<br><br>
+            </li>
+            
+            <li>
+                <strong>getResult(wheelNum, wheelInnerNum)</strong><br/>
+                This function set result for wheel, default -1 for random slot<br/><br/>
+            </li>
+        </ul>
+		<hr>
+        
+        <h3 id="gameAssets"><strong>G) Game Assets</strong> - <a href="#toc">top</a></h3>
+        <p>The game contain 'design' folder which include following:
+        <ol>
+        	<li>luckywheels_1280x768.psd - with layer folders below
+                <ul>
+                <li>Option</li>
+                <li>Result</li>
+                <li>Game</li>
+                <li>Landing</li>
+                </ul>
+        	</li>
+        </ol>
+        </p>
+        <p>The folder 'assets' in 'game' folder contains all the images of the game that can be replaced. Is better to have the same size of the old ones if you want to reskin the game graphic without coding.</p>
+        <hr>
+        
+        <h3 id="compatibility"><strong>I) Compatibility</strong> - <a href="#top">top</a></h3>
+		
+		<p>This game is build for Desktop browsers that support HTML5 canvas. Any mobile/tablet should work in landscape view, but they are not officially supported.</p>
+		<hr>
+
+        <h3 id="addons"><strong>J) Add-ons</strong> - <a href="#top">top</a></h3>
+		<p>The add-ons is an additional feature added to the game, below are the add-ons that are compatible with this game:<br>IMPORTANT: This game is only compatible with ONE of the add-ons below.</p>
+		<p></p><a href="https://codecanyon.net/item/scoreboard-for-html5-games/20196860" target="_blank"><img src="assets/images/scoreboard.png" /></a><br />
+        This game is compatible with Scoreboard for HTML5 Games, it is a add-ons page where user can submit score and view top 10 leaderboard. You can get it <a href="https://codecanyon.net/item/scoreboard-for-html5-games/20196860" target="_blank">here</a>.<br /><br /></p>
+
+		<p><a href="https://codecanyon.net/item/membership-and-rewards-system-addon/22940379"  target="_blank"><img src="assets/images/mrs.png" /></a><br>
+        This game is compatible with Membership and Rewards System add-on, it is a add-ons page where user can singup, login and retrieve their game data, redeem rewards with the available game points. You can get it <a href="https://codecanyon.net/item/membership-and-rewards-system-addon/22940379" target="_blank">here</a>.<br></p>
+		<hr>
+		
+		<h3 id="credits"><strong>K) Sources and Credits</strong> - <a href="#toc">top</a></h3>
+		
+		<p>I've used the following font and sound files as listed.</p>
+		
+		<ul>
+			<li><a href="http://www.dafont.com/libel-suit.font" target="_blank">Libel Suit</a> from file Typodermic Fonts</li>
+            <li><a href="http://www.freepik.com/free-vector/pack-of-minimalist-yellow-buttons_1069081.htm" target="_blank">
+Pack of minimalist yellow buttons</a> from file freepik</li>
+            <li><a href="http://freesound.org/people/pierrecartoons1979/sounds/118237/" target="_blank">
+major 7 slot machine.mp3</a> from file pierrecartoons1979</li>
+            <li><a href="http://freesound.org/people/Robinhood76/sounds/62589/" target="_blank">00530 bus ticket validate 1.wav</a> from file Robinhood76</li>
+            <li><a href="http://freesound.org/people/broumbroum/sounds/50561/" target="_blank">sf3-sfx-menu-select.wav</a> from file broumbroum</li>
+            
+            <li><a href="http://freesound.org/people/RICHERlandTV/sounds/351540/" target="_blank">alert3</a> from file RICHERlandTV</li>
+            <li><a href="http://freesound.org/people/FoolBoyMedia/sounds/352666/" target="_blank">Up Chime 2</a> from file foolBoyMedia</li>
+            <li><a href="http://freesound.org/people/Robinhood76/sounds/189505/" target="_blank">04412 coin automat - giving product sounds.wav</a> from file Robinhood76</li>
+            <li><a href="http://freesound.org/people/LloydEvans09/sounds/185828/" target="_blank">Little Thing</a> from file LloydEvans09</li>
+            
+            <li><a href="http://freesound.org/people/Mativve/sounds/391539/" target="_blank">Electro win sound</a> from file Mativve</li>
+            <li><a href="http://freesound.org/people/V4cuum/sounds/348644/" target="_blank">Sorry_Synth</a> from file V4cuum</li>
+            <li><a href="http://freesound.org/people/Mativve/sounds/391540/" target="_blank">Electro success sound</a> from file Mativve</li>
+		</ul>
+		
+		<hr>
+        
+        <h3 id="changelog"><strong>L) Changelog</strong> - <a href="#toc">top</a></h3>
+
+        Version 2.8
+		<ul>
+        	<li>Improve Membership and Rewards System add-on script</li>
+        	<li>Changed game settings</li>
+		</ul>
+
+        Version 2.7
+		<ul>
+			<li>Updated sound function</li>
+		</ul>
+
+        Version 2.6
+		<ul>
+        	<li>Improve Membership and Rewards System add-on script</li>
+		</ul>
+
+        Version 2.5
+		<ul>
+			<li>Add-on script integrated</li>
+		</ul>
+
+		Version 2.4
+		<ul>
+			<li>Add-on script integrated</li>
+		</ul>
+
+		Version 2.3
+		<ul>
+			<li>Updated result percentage</li>
+		</ul>
+
+		Version 2.2
+		<ul>
+			<li>Fixed result on same percentage issue</li>
+		</ul>
+
+		Version 2.1
+		<ul>
+			<li>New arrow movement for none physics option</li>
+		</ul>
+
+		Version 2.0
+		<ul>
+			<li>Update Google to Whatsapp share</li>
+		</ul>
+        
+        Version 1.9
+		<ul>
+			<li>Fixed result without physics engine</li>
+		</ul>
+        
+        Version 1.8
+		<ul>
+			<li>Now can edit each slot value display, instead of image now it can enter value options to draw out segment shape</li>
+		</ul>
+        
+        Version 1.7
+		<ul>
+			<li>Option to set result base on percentage</li>
+		</ul>
+
+		Version 1.6
+		<ul>
+			<li>Fixed inner wheel result</li>
+		</ul>
+        
+        Version 1.5
+		<ul>
+			<li>Compatible with Membership and Rewards System add-on</li>
+		</ul>
+        
+		Version 1.4
+		<ul>
+			<li>Fixed audio not playing in Chrome browser</li>
+		</ul>
+
+        Version 1.3
+		<ul>
+			<li>Option to set fixed result</li>
+		</ul>
+        
+        Version 1.2
+		<ul>
+			<li>Fixed customize slots pin</li>
+		</ul>
+        
+        Version 1.1
+		<ul>
+			<li>Fixed second wheel issue</li>
+		</ul>
+		<hr>
+		
+		<h3 id="support"><strong>M) Support Policy</strong> - <a href="#toc">top</a></h3>
+
+		<p>Check out support policy <a href="https://demonisblack.com/code/support-policy/">here</a>.</p>
+
+        <strong>Wordpress Site</strong><br/>
+        <p>
+            By using Scoreboard for HTML5 Games plugin, you can embed HTML5 game into WordPress post or page.<br>
+            <a href="https://wordpress.org/plugins/scoreboard-for-html5-game-lite/" target="_blank">> Plugin</a>
+        </p>
+
+        <strong>Ad Placeholder</strong><br/>
+        <p>
+            Help simulate ads on HTML5 Games, you can integrate and display static and takeover ads through different Ads Serving Platform.<br>
+            <a href="https://demonisblack.com/code/ads/" target="_blank">> Documentation</a>
+        </p>
+
+        <strong>Instant Games – Facebook</strong><br/>
+        <p>
+            Guide you through integrating Facebook Instant Games API in our HTML5 Games.<br>
+            <a href="https://demonisblack.com/code/instantgames/" target="_blank">> Documentation</a>
+        </p>
+		<hr>
+		
+		<p>Once again, thank you so much for purchasing this game, if you have a more general question relating to the games on CodeCanyon, you might consider visiting the item page in the <a href="https://codecanyon.net/item/lucky-wheels-html5-game/20299831/support">"Support"</a> section.</p>
+		<img src="assets/images/rate.png" />
+        
+        <p>
+        	<h3>How to rate an item on CodeCanyon?</h3>
+            Use the steps below to rate our items on CodeCanyon:
+            <ol>
+                <li>Login to CodeCanyon</li>
+                <li>Open the menu on the top right, and click onto the link “Downloads” which shows a list of your downloads</li>
+                <li>Rate our items using the stars</li>
+                <li>That’s it. Thank you very much!</li>
+            </ol>
+            <img src="assets/images/rateguide.png" />
+        </p>
+		
+		<p class="append-bottom alt large"><strong>demonisblack</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>
