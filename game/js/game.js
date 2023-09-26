@@ -25,7 +25,7 @@ var gameSettings = {
 };
 
 var textDisplay = {
-	statusText_arr:['Haz girar la rueda','GIRANDO...','[NUMBER]PTS', 'GANAS [NUMBER]PTS', 'MEJOR SUERTE LA PRÓXIMA!', 'JACKPOT [NUMBER]','PIERDES TODOS TUS PUNTOS'],
+	statusText_arr:['Haz girar la rueda','GIRANDO...','[NUMBER]PTS', 'GANAS [NUMBER]PTS', 'MEJOR SUERTE LA PRÓXIMA!', 'JACKPOT [NUMBER]','PIERDES TUS PUNTOS'],
 	creditText:'[NUMBER]PTS',
 	chancesText:'x [NUMBER]',
 	instructionTxt1:'Tienes 3 tickets para intentar,\ngira la rueda o apreta en el botón para empezar.',
