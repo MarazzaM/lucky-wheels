@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 // GAME v2.8
 ////////////////////////////////////////////////////////////
-
+const URL_NEXT= "http://localhost:3000/gracias"
 /*!
  * 
  * GAME SETTING CUSTOMIZATION START
@@ -14,7 +14,7 @@ var gameSettings = {
 	spinSpeed:30, //wheel spinning speed
 	touchSpin:true, //touch to spin (true/false)
 	gamePlayType:true, //game play type; true for game1, false for game2
-	gameChance:3, //total chances for game 1
+	gameChance:1, //total chances for game 1
 	gameBetPoint:500, //total bet point for game 2
 	gameCanBet:10, //total bet increase for game 2
 	gameMaxBet:1000, //max bet for game 2
@@ -79,7 +79,7 @@ var wheelSecond_arr = [{src:'', highlight:'', regX:0, regY:100, mutiply:1, perce
 					{src:'assets/item_wheel_inner_05.png', highlight:'assets/item_wheel_inner_05_h.png', regX:0, regY:100, mutiply:1, percent:30}];
 
 //Social share, [SCORE] will replace with game score
-var shareEnable = true; //toggle share
+var shareEnable = false; //toggle share
 var shareText = 'COMPARTE TU PUNTAJE'; //social share message
 var shareTitle = 'El puntaje más alto es [SCORE]PTS.';//social share score title
 var shareMessage = '[SCORE]PTS es mi puntaje más alto, Ahora inténtalo vos!'; //social share score message
@@ -184,7 +184,9 @@ function buildGameButton(){
 	buttonReplay.cursor = "pointer";
 	buttonReplay.addEventListener("click", function(evt) {
 		playSound('soundClick');
-		goPage('game');
+		// goPage('game');
+			window.location.href = URL_NEXT;
+
 	});
 	
 	buttonFacebook.cursor = "pointer";
